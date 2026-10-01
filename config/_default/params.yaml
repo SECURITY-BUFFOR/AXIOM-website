@@ -9,6 +9,6 @@ default_theme: 'system'
 
 links:
   - { label: 'Security Buffor', url: 'https://securitybuffor.com' }
-  - { label: 'GitLab', url: 'https://gitlab.com/security-buffor' }
+  - { label: 'GitHub', url: 'https://github.com/SECURITY-BUFFOR' }
   - { label: 'Plugins', url: 'https://github.com/AXIOM-Plugins' }
   - { label: 'Email', url: 'mailto:h4mr3r@securitybuffor.com' }
