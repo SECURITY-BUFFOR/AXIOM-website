@@ -13,7 +13,7 @@
   </div>
 
   <figure class="window hero__screen">
-    <div class="window__bar"><span>{{ $h.screen_title | default (printf "%s.EXE" (upper $brand)) }}</span><span aria-hidden="true">[■]</span></div>
+    <div class="window__bar"><span>{{ $h.screen_title | default (upper $brand) }}</span><span aria-hidden="true">[■]</span></div>
     <div class="window__media">
       {{ partial "picture.html" (dict "src" $h.screen "alt" $h.screen_alt "sizes" "(min-width: 1024px) 640px, 100vw" "eager" true "zoom" "hero") }}
     </div>

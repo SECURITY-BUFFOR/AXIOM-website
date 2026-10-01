@@ -8,7 +8,7 @@ hero:
   text: 'Create findings, generate PDF reports, and collaborate in real time — one workspace for the whole engagement.'
   screen: 'images/axiom/slides/04-project-overview.png'
   screen_alt: 'Axiom project workspace with findings, members, notes, and report actions'
-  screen_title: 'AXIOM.EXE — PROJECT WORKSPACE'
+  screen_title: 'AXIOM — PROJECT WORKSPACE'
   primary: { text: 'Take the tour', url: '#tour' }
   secondary: { text: 'Request a demo', url: 'mailto:h4mr3r@securitybuffor.com?subject=Axiom%20demo' }
   specs:
