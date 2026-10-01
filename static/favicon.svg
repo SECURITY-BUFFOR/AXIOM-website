@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-labelledby="axiom-logo-title">
+  <title id="axiom-logo-title">Axiom reporting tool</title>
+  <path fill="#191919" stroke="#7d1d1d" stroke-width="2" d="M4 2h19l5 5v23H4z"/>
+  <path fill="none" stroke="#e8e2e0" stroke-width="1.5" d="M22 2v6h6"/>
+  <path fill="#7d1d1d" d="M4 2h4v28H4z"/>
+  <path fill="none" stroke="#e8e2e0" stroke-width="1.6" stroke-linecap="square" stroke-linejoin="miter" d="m11 11 3 3-3 3m5 0h4"/>
+  <path fill="#7d1d1d" d="M11 24h3v3h-3zm5-3h3v6h-3zm5-5h3v11h-3z"/>
+</svg>

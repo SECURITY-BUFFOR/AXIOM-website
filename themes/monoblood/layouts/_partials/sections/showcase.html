@@ -1,0 +1,71 @@
+{{- /*
+  Showcase — a single flagship artefact: large preview window on the left,
+  description plus two labelled lists and a call to action on the right.
+
+  Front matter (.Params.showcase): title, text, chips_label, scale_label, chips, scale
+  Data file (data/showcase.yaml, first entry): category, name, description, image, alt,
+                                               preview_title, link, cta_url, cta_text
+
+  `link` makes the preview itself clickable (use it when there is an example to open).
+  The body call to action follows `cta_url`, falling back to `link`, so a product with
+  nothing to link still keeps the section's shape.
+*/ -}}
+{{- $s := .Params.showcase -}}
+{{- with index (hugo.Data.showcase | default slice) 0 -}}
+{{- $d := . -}}
+{{- $ctaUrl := $d.cta_url | default $d.link -}}
+<section id="showcase" class="section wrap" aria-labelledby="showcase-title">
+  {{ partial "section-head.html" (dict "id" "showcase-title" "title" $s.title "text" $s.text) }}
+
+  <div class="report">
+    {{- $linked := ne $d.link "" -}}
+    {{- if $linked -}}
+    <a class="window report__preview" href="{{ $d.link | relURL }}" target="_blank" rel="noopener" aria-label="Open {{ $d.name }}">
+      <span class="window__bar"><span>{{ $d.preview_title }}</span><span aria-hidden="true">↗</span></span>
+      {{ partial "picture.html" (dict "src" $d.image "alt" $d.alt "sizes" "(min-width: 1024px) 620px, 100vw") }}
+    </a>
+    {{- else -}}
+    <figure class="window report__preview">
+      <span class="window__bar"><span>{{ $d.preview_title }}</span><span aria-hidden="true">[■]</span></span>
+      {{ partial "picture.html" (dict "src" $d.image "alt" $d.alt "sizes" "(min-width: 1024px) 620px, 100vw" "zoom" "showcase" "caption" $d.description) }}
+    </figure>
+    {{- end -}}
+
+    <div class="report__body">
+      <p class="report__cat">{{ $d.category }}</p>
+      <h3 class="report__name">{{ $d.name }}</h3>
+      <p class="report__desc">{{ $d.description }}</p>
+
+      {{ with $s.chips }}
+      <p class="label">{{ $s.chips_label | default "What's inside" }}</p>
+      <ul class="report__includes">
+        {{ range . }}<li>{{ . }}</li>{{ end }}
+      </ul>
+      {{ end }}
+
+      {{ with $s.scale }}
+      <p class="label">{{ $s.scale_label | default "Scale" }}</p>
+      <ol class="severity" data-steps="{{ len . }}" aria-label="{{ $s.scale_label | default "Scale" }}, ordered">
+        {{ range . }}<li>{{ . }}</li>{{ end }}
+      </ol>
+      {{ end }}
+
+      {{ with $ctaUrl }}
+      {{- /* Site-relative paths get resolved and open in a new tab (they are documents);
+             absolute URLs open in a new tab as-is; mailto: and #anchors stay untouched. */ -}}
+      {{- $href := . -}}
+      {{- $newTab := false -}}
+      {{- if hasPrefix . "http" -}}
+        {{- $newTab = true -}}
+      {{- else if hasPrefix . "/" -}}
+        {{- $href = relURL . -}}
+        {{- $newTab = true -}}
+      {{- end -}}
+      <div class="actions">
+        <a class="btn btn--primary" href="{{ $href }}"{{ if $newTab }} target="_blank" rel="noopener"{{ end }}>{{ $d.cta_text | default $d.link_text | default "View example" }} <span aria-hidden="true">{{ cond $newTab "↗" "→" }}</span></a>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{- end -}}

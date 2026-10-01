@@ -1,0 +1,18 @@
+{{ define "main" }}
+<section class="error wrap">
+  <div class="window error__window">
+    <div class="window__bar"><span>ERROR 404</span><span aria-hidden="true">[■]</span></div>
+    <div class="error__body">
+      <p class="error__code" aria-hidden="true">404</p>
+      <h1>File not found</h1>
+      <p>{{ site.Params.not_found_text | default (printf "This page doesn't exist. The %s site lives on a single page, so deeper links no longer resolve here." site.Params.brand) }}</p>
+      <p class="error__prompt">Abort, Tour, Ignore?<i class="cursor" aria-hidden="true"></i></p>
+      <div class="actions">
+        <a class="btn btn--primary" href="{{ site.Home.RelPermalink }}" data-key="a"><kbd>A</kbd>bort — home</a>
+        <a class="btn btn--dark" href="{{ site.Home.RelPermalink }}#tour" data-key="t">Product&nbsp;<kbd>T</kbd>our</a>
+        <button type="button" class="btn btn--dark" data-key="i" onclick="history.back()"><kbd>I</kbd>gnore — go back</button>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}

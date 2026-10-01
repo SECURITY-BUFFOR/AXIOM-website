@@ -1,0 +1,5 @@
+{{- /* props: id, title, text */ -}}
+<header class="section-head">
+  <h2 id="{{ .id }}">{{ .title }}</h2>
+  {{ with .text }}<p>{{ . }}</p>{{ end }}
+</header>

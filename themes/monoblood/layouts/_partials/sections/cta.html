@@ -1,0 +1,15 @@
+{{- with .Params.cta -}}
+<section class="cta wrap" aria-labelledby="cta-title">
+  <div class="cta__box">
+    <div>
+      {{ with .kicker }}<p class="kicker">{{ . }}</p>{{ end }}
+      <h2 id="cta-title">{{ .title }}</h2>
+      <p>{{ .text }}</p>
+    </div>
+    <div class="actions">
+      {{ with .primary }}<a class="btn btn--light" href="{{ .url }}">{{ .text }} <span aria-hidden="true">→</span></a>{{ end }}
+      {{ with .secondary }}<a class="btn btn--outline" href="{{ .url }}" target="_blank" rel="noopener">{{ .text }} <span aria-hidden="true">↗</span></a>{{ end }}
+    </div>
+  </div>
+</section>
+{{- end -}}

@@ -1,0 +1,14 @@
+brand: 'AXIOM'
+organization: 'Security Buffor'
+tagline: 'Pentest reporting platform'
+seo_title: 'Axiom — Pentest Reporting Platform | Security Buffor'
+image: 'images/sharing.png'
+
+# light | dark | system (visitor choice is remembered)
+default_theme: 'system'
+
+links:
+  - { label: 'Security Buffor', url: 'https://securitybuffor.com' }
+  - { label: 'GitLab', url: 'https://gitlab.com/security-buffor' }
+  - { label: 'Plugins', url: 'https://github.com/AXIOM-Plugins' }
+  - { label: 'Email', url: 'mailto:h4mr3r@securitybuffor.com' }

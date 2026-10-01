@@ -1,0 +1,27 @@
+{{- $h := .Params.hero -}}
+{{- $brand := site.Params.brand | default site.Title -}}
+<section class="hero wrap" aria-labelledby="hero-title">
+  <div class="hero__copy">
+    <p class="kicker">{{ $h.kicker }}</p>
+    <h1 id="hero-title" class="hero__title" style="--chars: {{ len $brand }}"><span class="hero__prompt" aria-hidden="true">&gt;</span>{{ $brand }}<i class="cursor" aria-hidden="true"></i></h1>
+    <p class="hero__lead">{{ $h.lead }}</p>
+    <p class="hero__text">{{ $h.text }}</p>
+    <div class="actions">
+      {{ with $h.primary }}<a class="btn btn--primary" href="{{ .url }}">{{ .text }} <span aria-hidden="true">↓</span></a>{{ end }}
+      {{ with $h.secondary }}<a class="btn" href="{{ .url }}">{{ .text }}</a>{{ end }}
+    </div>
+  </div>
+
+  <figure class="window hero__screen">
+    <div class="window__bar"><span>{{ $h.screen_title | default (printf "%s.EXE" (upper $brand)) }}</span><span aria-hidden="true">[■]</span></div>
+    <div class="window__media">
+      {{ partial "picture.html" (dict "src" $h.screen "alt" $h.screen_alt "sizes" "(min-width: 1024px) 640px, 100vw" "eager" true "zoom" "hero") }}
+    </div>
+  </figure>
+
+  {{ with $h.specs }}
+  <dl class="specs">
+    {{ range . }}<div><dt>{{ .key }}</dt><dd>{{ .value }}</dd></div>{{ end }}
+  </dl>
+  {{ end }}
+</section>

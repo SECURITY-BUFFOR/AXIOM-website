@@ -1,0 +1,42 @@
+{{- $t := .Params.tour -}}
+{{- $brand := site.Params.brand | default site.Title -}}
+{{- $slides := hugo.Data.slides | default slice -}}
+{{- if $slides -}}
+<section id="tour" class="section wrap" aria-labelledby="tour-title">
+  {{ partial "section-head.html" (dict "id" "tour-title" "title" $t.title "text" $t.text) }}
+
+  <div class="tour" data-tour>
+    <div class="tour__tabs" role="tablist" aria-label="{{ $brand }} screens" aria-orientation="vertical">
+      {{ range $i, $s := $slides }}
+      <button type="button" role="tab" id="tour-tab-{{ $i }}" aria-controls="tour-panel-{{ $i }}" aria-selected="{{ if eq $i 0 }}true{{ else }}false{{ end }}" tabindex="{{ if eq $i 0 }}0{{ else }}-1{{ end }}" data-tour-tab>{{ $s.label }}</button>
+      {{ end }}
+    </div>
+
+    <div class="window tour__screen">
+      <div class="window__bar">
+        <span>{{ upper $brand }} // <span data-tour-label>{{ (index $slides 0).label }}</span></span>
+        <span aria-hidden="true">[■]</span>
+      </div>
+      <div class="tour__stage">
+        {{ range $i, $s := $slides }}
+        <figure class="tour__panel" role="tabpanel" id="tour-panel-{{ $i }}" aria-labelledby="tour-tab-{{ $i }}" data-label="{{ $s.label }}"{{ if ne $i 0 }} hidden{{ end }}>
+          <div class="window__media">
+            {{ partial "picture.html" (dict "src" $s.image "alt" $s.alt "caption" (printf "%s — %s" $s.title $s.description) "sizes" "(min-width: 1024px) 900px, 100vw" "zoom" "tour") }}
+          </div>
+          <figcaption>
+            <h3>{{ $s.title }}</h3>
+            <p>{{ $s.description }}</p>
+          </figcaption>
+        </figure>
+        {{ end }}
+      </div>
+      <div class="tour__controls">
+        <button type="button" data-tour-prev aria-label="Previous screen">← <span>Prev</span></button>
+        <button type="button" data-tour-toggle aria-pressed="false" aria-label="Pause slideshow"><span data-tour-toggle-label>Pause</span></button>
+        <button type="button" data-tour-next aria-label="Next screen"><span>Next</span> →</button>
+        <span class="tour__progress" aria-hidden="true"><i data-tour-progress></i></span>
+      </div>
+    </div>
+  </div>
+</section>
+{{- end -}}

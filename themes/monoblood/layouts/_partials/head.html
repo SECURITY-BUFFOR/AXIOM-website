@@ -1,0 +1,75 @@
+{{- $title := cond .IsHome (site.Params.seo_title | default site.Title) (printf "%s | %s" .Title site.Title) -}}
+{{- $desc := .Description | default site.Params.tagline -}}
+{{- $image := site.Params.image | absURL -}}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{ $title }}</title>
+<meta name="description" content="{{ $desc }}">
+<link rel="canonical" href="{{ .Permalink }}">
+<meta name="theme-color" content="#0b0b0b">
+<meta name="color-scheme" content="light dark">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:image" content="{{ $image }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" type="image/svg+xml" href="{{ "favicon.svg" | relURL }}">
+{{ if os.FileExists "static/favicon.ico" }}<link rel="icon" href="{{ "favicon.ico" | relURL }}" sizes="any">{{ end }}
+<link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}">
+
+<script>
+  /* Resolve the theme before first paint. The storage key is shared across all
+     Security Buffor properties, so a visitor's choice follows them between sites. */
+  (function () {
+    var root = document.documentElement;
+    var theme = root.getAttribute("data-theme");
+    try {
+      var stored = localStorage.getItem("axiom-theme");
+      if (stored === "axiomDark" || stored === "axiomLight") theme = stored === "axiomDark" ? "dark" : "light";
+    } catch (e) {}
+    if (theme !== "dark" && theme !== "light") {
+      theme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    root.setAttribute("data-theme", theme);
+  })();
+</script>
+
+{{/* Self-hosted JetBrains Mono (variable, latin + latin-ext). No third-party font request.
+     monoblood.css reaches these by relative path, so both subsets must be published —
+     latin-ext has no preload (it is rarely hit) but still has to land in /fonts/. */}}
+{{ with resources.Get "fonts/jetbrains-mono-latin.woff2" }}
+  <link rel="preload" href="{{ .RelPermalink }}" as="font" type="font/woff2" crossorigin>
+{{ end }}
+{{ with resources.Get "fonts/jetbrains-mono-latin-ext.woff2" }}{{ .Publish }}{{ end }}
+{{ with resources.Get "css/monoblood.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
+{{ end }}
+
+{{/* Preload the hero screenshot: it is the page's largest contentful paint. */}}
+{{ if .IsHome }}
+  {{ with .Params.hero.screen }}
+    {{ with resources.Get . }}
+      {{ $r := .Resize "1440x webp q80" }}
+      <link rel="preload" href="{{ $r.RelPermalink }}" as="image" fetchpriority="high">
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+<script type="application/ld+json">
+{{ dict
+  "@context" "https://schema.org"
+  "@type" "SoftwareApplication"
+  "name" site.Title
+  "applicationCategory" "SecurityApplication"
+  "operatingSystem" "Web"
+  "description" $desc
+  "url" site.BaseURL
+  "publisher" (dict "@type" "Organization" "name" site.Params.organization "url" "https://securitybuffor.com")
+  | jsonify | safeJS }}
+</script>

@@ -1,0 +1,24 @@
+# Axiom — product showcase site (single page, no documentation)
+title: 'Axiom'
+baseURL: 'https://axiom.securitybuffor.com/'
+theme: 'monoblood'
+locale: 'en-US'
+
+# One landing page: no sections, taxonomies, or feeds to render.
+disableKinds: [section, taxonomy, term, rss]
+enableRobotsTXT: true
+enableGitInfo: false
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: false
+
+imaging:
+  resampleFilter: lanczos
+  quality: 82
+
+minify:
+  tdewolff:
+    html:
+      keepWhitespace: false

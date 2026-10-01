@@ -1,0 +1,9 @@
+# Slot 5 — the flagship artefact this product ships with.
+- name: MonoBlood Pentest Report
+  category: Complete report design
+  description: A complete A4 security-assessment report foundation with cover, table of contents, findings, severity system, tables, and print styling.
+  image: /images/designs/monoblood-pentest-report.svg
+  alt: "MonoBlood pentest report design: cover page and findings overview"
+  link: /examples/designs/monoblood-pentest-report.html
+  link_text: View example
+  preview_title: REPORT.PDF — PREVIEW

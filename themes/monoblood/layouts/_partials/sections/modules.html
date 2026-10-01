@@ -1,0 +1,43 @@
+{{- /*
+  Modules — extension points on the left, shipped module cards on the right.
+
+  Front matter (.Params.modules): title, text, points_label, extensions[{name,text}]
+  Data file (data/modules.yaml): category, name, description, download (optional)
+*/ -}}
+{{- with .Params.modules -}}
+<section id="modules" class="section wrap" aria-labelledby="modules-title">
+  {{ partial "section-head.html" (dict "id" "modules-title" "title" .title "text" .text) }}
+
+  {{- $cards := hugo.Data.modules | default slice -}}
+  <div class="plugins{{ if not $cards }} plugins--solo{{ end }}">
+    <div class="plugins__points">
+      <p class="label">{{ .points_label | default "Extension points" }}</p>
+      <dl class="points">
+        {{ range .extensions }}<div><dt>{{ .name }}</dt><dd>{{ .text }}</dd></div>{{ end }}
+      </dl>
+    </div>
+
+    {{ with $cards }}
+    <div class="plugins__side">
+      {{ range . }}
+      <article class="window plugin-card">
+        <div class="window__bar"><span>MODULE // {{ .category }}</span><span aria-hidden="true">[■]</span></div>
+        <div class="plugin-card__body">
+          <h3>{{ .name }}</h3>
+          <p>{{ .description }}</p>
+          {{ with .tags }}
+          <ul class="plugin-card__tags">
+            {{ range . }}<li>{{ . }}</li>{{ end }}
+          </ul>
+          {{ end }}
+          {{ with .download }}
+          <a class="btn btn--primary" href="{{ . }}" target="_blank" rel="noopener noreferrer">Get the plugin <span aria-hidden="true">↗</span></a>
+          {{ end }}
+        </div>
+      </article>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</section>
+{{- end -}}

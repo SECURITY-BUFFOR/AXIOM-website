@@ -1,0 +1,30 @@
+image: debian:bookworm-slim
+
+variables:
+  HUGO_VERSION: "0.162.0"
+  HUGO_ENVIRONMENT: production
+  HUGO_ENV: production
+
+cache:
+  key: hugo-resources
+  paths:
+    - resources/
+
+create-pages:
+  stage: deploy
+  before_script:
+    - apt-get update
+    - apt-get install --yes --no-install-recommends ca-certificates curl
+    - curl --fail --location --retry 3 --output /tmp/hugo.deb "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb"
+    - dpkg --install /tmp/hugo.deb
+  script:
+    # Keep generated links and assets on the canonical custom domain.
+    # CI_PAGES_URL points at the GitLab-provided *.gitlab.io alias even when
+    # the project is served through axiom.securitybuffor.com.
+    - hugo --gc --minify
+    - test -s public/index.html
+    - test -s public/404.html
+  pages:
+    publish: public
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH'

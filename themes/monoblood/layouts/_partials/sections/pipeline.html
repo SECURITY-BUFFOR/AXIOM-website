@@ -1,0 +1,14 @@
+{{- with .Params.pipeline -}}
+<section class="pipeline wrap" aria-labelledby="pipeline-title">
+  <h2 id="pipeline-title" class="pipeline__title">{{ .title }}</h2>
+  <ol class="pipeline__steps">
+    {{ range .steps }}
+    <li>
+      <span class="pipeline__mark" aria-hidden="true"><i></i></span>
+      <b>{{ .name }}</b>
+      <p>{{ .text }}</p>
+    </li>
+    {{ end }}
+  </ol>
+</section>
+{{- end -}}

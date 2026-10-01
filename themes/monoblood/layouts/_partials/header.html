@@ -1,0 +1,24 @@
+<header class="site-header" data-header>
+  <div class="site-header__inner">
+    <a href="{{ site.Home.RelPermalink }}" class="wordmark" aria-label="{{ site.Title }} home">
+      <img src="{{ "favicon.svg" | relURL }}" alt="" width="30" height="30">
+      <span><i aria-hidden="true">&gt;</i> {{ site.Params.brand | default site.Title }}</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      {{ range site.Menus.main }}<a href="{{ .URL | relURL }}" data-nav-link>{{ .Name }}</a>{{ end }}
+    </nav>
+    <div class="site-header__actions">
+      <button type="button" class="hdr-btn theme-toggle" data-theme-toggle aria-label="Switch to light theme">
+        <svg class="icon-sun" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M7 0h2v3H7zM7 13h2v3H7zM0 7h3v2H0zM13 7h3v2h-3zM5 5h6v6H5z"/></svg>
+        <svg class="icon-moon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M6 1h5v1H8v1H7v2H6v6h1v2h1v1h3v1H6v-1H4v-1H3v-2H2V5h1V3h1V2h2z"/></svg>
+      </button>
+      <button type="button" class="hdr-btn menu-toggle" data-menu-toggle aria-controls="mobile-menu" aria-expanded="false">
+        <span class="menu-toggle__open">Menu</span><span class="menu-toggle__close">Close</span>
+      </button>
+    </div>
+  </div>
+  <nav id="mobile-menu" class="mobile-menu" aria-label="Mobile" data-menu hidden>
+    {{ range site.Menus.main }}<a href="{{ .URL | relURL }}">{{ .Name }}<i aria-hidden="true">→</i></a>{{ end }}
+    {{ with .Site.Home.Params.cta.primary }}<a class="mobile-menu__cta" href="{{ .url }}">{{ .text }}<i aria-hidden="true">→</i></a>{{ end }}
+  </nav>
+</header>

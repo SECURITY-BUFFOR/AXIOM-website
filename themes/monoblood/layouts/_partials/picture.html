@@ -1,0 +1,46 @@
+{{- /*
+  Screenshot renderer.
+
+  props: src   — path under assets/ (preferred), or a site-relative static path
+         alt   — required
+         sizes, eager (bool)
+         zoom  — optional lightbox group name; wraps the image in a link to the full-size version
+         width, height — only needed for static/SVG sources, which cannot be measured
+
+  Raster assets become a responsive WebP srcset. SVGs and static paths are emitted
+  as-is, since neither can be resized by Hugo's image pipeline.
+*/ -}}
+{{- $img := resources.Get .src -}}
+{{- $isRaster := and $img (not (strings.HasSuffix (lower .src) ".svg")) -}}
+
+{{- if $isRaster -}}
+  {{- $widths := slice 640 1024 1440 1920 -}}
+  {{- $set := slice -}}
+  {{- $fallback := "" -}}
+  {{- range $widths -}}
+    {{- if le . $img.Width -}}
+      {{- $r := $img.Resize (printf "%dx webp q80" .) -}}
+      {{- $set = $set | append (printf "%s %dw" $r.RelPermalink .) -}}
+      {{- if eq . 1440 }}{{ $fallback = $r }}{{ end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if not $fallback }}{{ $fallback = $img.Resize (printf "%dx webp q80" (math.Min $img.Width 1440 | int)) }}{{ end -}}
+  {{- $tag := printf `<img src="%s" srcset="%s" sizes="%s" width="%d" height="%d" alt="%s" decoding="async"%s>` $fallback.RelPermalink (delimit $set ", ") (.sizes | default "100vw") $img.Width $img.Height (.alt | htmlEscape) (cond (.eager | default false) ` fetchpriority="high"` ` loading="lazy"`) -}}
+  {{- with .zoom -}}
+    {{- $full := $img.Resize (printf "%dx webp q88" (math.Min $img.Width 2400 | int)) -}}
+    <a class="zoom" href="{{ $full.RelPermalink }}" data-lightbox="{{ . }}" data-caption="{{ $.caption | default $.alt }}" aria-label="Enlarge: {{ $.alt }}">
+      {{- $tag | safeHTML -}}
+      <span class="zoom__hint" aria-hidden="true">⤢ Enlarge</span>
+    </a>
+  {{- else -}}
+    {{- $tag | safeHTML -}}
+  {{- end -}}
+
+{{- else -}}
+  {{- /* SVG asset, or a path served from static/. */ -}}
+  {{- $href := "" -}}
+  {{- if $img }}{{ $href = $img.RelPermalink }}{{ else }}{{ $href = .src | relURL }}{{ end -}}
+  {{- $dims := "" -}}
+  {{- if and .width .height }}{{ $dims = printf ` width="%v" height="%v"` .width .height }}{{ end -}}
+  {{- printf `<img src="%s" alt="%s" decoding="async"%s%s>` $href (.alt | htmlEscape) $dims (cond (.eager | default false) ` fetchpriority="high"` ` loading="lazy"`) | safeHTML -}}
+{{- end -}}

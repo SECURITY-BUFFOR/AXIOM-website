@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.Locale | default "en" }}" data-theme="{{ site.Params.default_theme | default "system" }}">
+  <head>
+    {{ partial "head.html" . }}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    {{ partial "header.html" . }}
+    <main id="main">
+      {{ block "main" . }}{{ end }}
+    </main>
+    {{ partial "footer.html" . }}
+    {{ if .IsHome }}{{ partial "lightbox.html" . }}{{ end }}
+    <button type="button" class="to-top" data-to-top aria-label="Back to top"><span aria-hidden="true">↑</span><span class="to-top__label">Top</span></button>
+    {{ with resources.Get "js/monoblood.js" | js.Build (dict "minify" true "target" "es2018") | fingerprint }}
+      <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
+    {{ end }}
+  </body>
+</html>

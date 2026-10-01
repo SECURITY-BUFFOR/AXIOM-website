@@ -1,0 +1,13 @@
+{{- with .Params.features -}}
+<section id="features" class="section wrap" aria-labelledby="features-title">
+  {{ partial "section-head.html" (dict "id" "features-title" "title" .title "text" .text) }}
+  <ul class="features">
+    {{ range .items }}
+    <li class="feature">
+      <h3>{{ .name }}</h3>
+      <p>{{ .description }}</p>
+    </li>
+    {{ end }}
+  </ul>
+</section>
+{{- end -}}

@@ -1,0 +1,17 @@
+{{- /*
+  Trust band — a short strip of operational guarantees directly under the hero.
+
+  Front matter (.Params.trust): items[{name, text}]. Omit the key to skip the band.
+*/ -}}
+{{- with .Params.trust -}}
+<section class="trust wrap" aria-label="Operational guarantees">
+  <ul class="trust__items">
+    {{ range .items }}
+    <li>
+      <b>{{ .name }}</b>
+      <span>{{ .text }}</span>
+    </li>
+    {{ end }}
+  </ul>
+</section>
+{{- end -}}

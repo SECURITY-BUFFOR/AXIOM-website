@@ -1,0 +1,6 @@
+# In-page anchors on the landing page
+main:
+  - { name: 'Tour', url: '/#tour', weight: 10 }
+  - { name: 'Features', url: '/#features', weight: 20 }
+  - { name: 'Reports', url: '/#showcase', weight: 30 }
+  - { name: 'Plugins', url: '/#modules', weight: 40 }

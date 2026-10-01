@@ -1,0 +1,12 @@
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <p class="site-footer__copy">&copy; {{ now.Format "2006" }} {{ site.Params.organization }}<span> — {{ site.Params.brand }} is a {{ site.Params.organization }} project.</span></p>
+    {{ with site.Params.links }}
+    <nav class="fkeys" aria-label="External links">
+      {{ range . }}
+      <a href="{{ .url }}"{{ if not (hasPrefix .url "mailto:") }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ .label }}</a>
+      {{ end }}
+    </nav>
+    {{ end }}
+  </div>
+</footer>
