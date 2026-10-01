@@ -83,7 +83,7 @@ modules:
 cta:
   kicker: 'Get in touch'
   title: 'See Axiom on a real engagement.'
-  text: 'Axiom is in active development. Reach out for a walkthrough or to hear when it becomes available.'
+  text: 'Axiom is not public. Reach out for a walkthrough or to hear when it becomes available.'
   primary: { text: 'Request a demo', url: 'mailto:h4mr3r@securitybuffor.com?subject=Axiom%20demo' }
   secondary: { text: 'More from Security Buffor', url: 'https://securitybuffor.com' }
 ---
