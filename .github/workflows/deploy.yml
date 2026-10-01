@@ -51,9 +51,7 @@ jobs:
           restore-keys: hugo-resources-${{ runner.os }}-
 
       - name: Build
-        # base_url is the custom domain when one is configured in repo settings,
-        # and the project subpath otherwise, so the build is correct either way.
-        run: hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+        run: hugo --gc --minify
 
       - name: Verify output
         run: |
