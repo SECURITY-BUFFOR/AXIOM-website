@@ -1,16 +1,16 @@
 ---
-title: 'Axiom — Pentest Reporting Platform'
-description: 'Axiom is a pentest reporting platform by Security Buffor: structured findings, CVSS scoring, live collaboration, scanner imports, and client-ready PDF reports.'
+title: 'AXIOM — Pentest Reporting Platform'
+description: 'AXIOM is a pentest reporting platform by Security Buffor: structured findings, CVSS scoring, live collaboration, scanner imports, and client-ready PDF reports.'
 
 hero:
   kicker: 'Pentest reporting platform'
   lead: 'Findings in. Reports out.'
   text: 'Create findings, generate PDF reports, and collaborate in real time — one workspace for the whole engagement.'
   screen: 'images/axiom/slides/04-project-overview.png'
-  screen_alt: 'Axiom project workspace with findings, members, notes, and report actions'
+  screen_alt: 'AXIOM project workspace with findings, members, notes, and report actions'
   screen_title: 'AXIOM — PROJECT WORKSPACE'
   primary: { text: 'Take the tour', url: '#tour' }
-  secondary: { text: 'Request a demo', url: 'mailto:h4mr3r@securitybuffor.com?subject=Axiom%20demo' }
+  secondary: { text: 'Request a demo', url: 'mailto:h4mr3r@securitybuffor.com?subject=AXIOM%20demo' }
   specs:
     - { key: 'Scoring', value: 'CVSS 3.1 + 4.0' }
     - { key: 'Output', value: 'PDF via WeasyPrint' }
@@ -51,7 +51,7 @@ features:
     - name: 'Scanner import'
       description: 'Bring findings in from Burp Suite, Nessus, Nmap, and ZAP. The importer registry is extensible through plugins.'
     - name: 'Plugin system'
-      description: 'Extend Axiom with Django app plugins: API endpoints, template tags, signal handlers, importers, and frontend pages.'
+      description: 'Extend AXIOM with Django app plugins: API endpoints, template tags, signal handlers, importers, and frontend pages.'
 
 showcase:
   title: 'Report template'
@@ -71,19 +71,19 @@ showcase:
 
 modules:
   title: 'Plugins'
-  text: 'Axiom plugins are regular Django apps. Each one can add its own endpoints, importers, report helpers, and pages to the workspace.'
+  text: 'AXIOM plugins are regular Django apps. Each one can add its own endpoints, importers, report helpers, and pages to the workspace.'
   points_label: 'Extension points'
   extensions:
     - { name: 'API endpoint', text: 'Add routes under /api/plugins/' }
     - { name: 'Template tags', text: 'Custom tags and filters for reports' }
     - { name: 'Importer', text: 'Turn any file format into findings' }
     - { name: 'Signals', text: 'React to project and finding events' }
-    - { name: 'Frontend', text: 'Embed a page in the Axiom sidebar' }
+    - { name: 'Frontend', text: 'Embed a page in the AXIOM sidebar' }
 
 cta:
   kicker: 'Get in touch'
-  title: 'See Axiom on a real engagement.'
-  text: 'Axiom is not public. Reach out for a walkthrough or to hear when it becomes available.'
-  primary: { text: 'Request a demo', url: 'mailto:h4mr3r@securitybuffor.com?subject=Axiom%20demo' }
+  title: 'See AXIOM on a real engagement.'
+  text: 'AXIOM is not public. Reach out for a walkthrough or to hear when it becomes available.'
+  primary: { text: 'Request a demo', url: 'mailto:h4mr3r@securitybuffor.com?subject=AXIOM%20demo' }
   secondary: { text: 'More from Security Buffor', url: 'https://securitybuffor.com' }
 ---

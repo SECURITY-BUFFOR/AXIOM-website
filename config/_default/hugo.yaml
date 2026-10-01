@@ -1,5 +1,5 @@
-# Axiom — product showcase site (single page, no documentation)
-title: 'Axiom'
+# AXIOM — product showcase site (single page, no documentation)
+title: 'AXIOM'
 baseURL: 'https://axiom.securitybuffor.com/'
 theme: 'monoblood'
 locale: 'en-US'
